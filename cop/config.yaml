@@ -1,0 +1,80 @@
+env_params:
+  'TSP':
+    'problem_size':
+    'pomo_size':
+  'CVRP':
+    'problem_size':
+    'pomo_size':
+  'OP':
+    'prize_type': 'dist'
+    'problem_size':
+    'pomo_size':
+  'KP':
+    'problem_size':
+    'pomo_size':
+  'same': False
+
+unseen_env_params:
+  'TSP':
+    'problem_size':
+    'pomo_size':
+  'CVRP':
+    'problem_size':
+    'pomo_size':
+  'OP':
+    'prize_type': 'dist'
+    'problem_size':
+    'pomo_size':
+  'KP':
+    'problem_size':
+    'pomo_size':
+
+model_params:
+    'embedding_dim': 128
+    'sqrt_embedding_dim': 128**.5
+    'encoder_layer_num': 6
+    'qkv_dim': 16
+    'head_num': 8
+    'logit_clipping': 10
+    'ff_hidden_dim': 512
+    'eval_type': 'argmax'
+
+trainer_params:
+    'separate_train': False
+    'use_cuda': True
+    'cuda_device_num': 0
+    'epochs': 1000
+    'train_episodes': 100 * 1000
+    'train_batch_size': 512
+    'logging':
+        'model_save_interval': 50
+        'img_save_interval': 10
+    'rew_alpha': 0.8
+    'ducb_param':
+      'alpha': 1
+      'gamma': .95
+    'cusumucb':
+      'epsilon': 0.01
+      'max_nb_random_events':
+      'lazy_detect_change_only_x_steps': 1
+      'min_number_of_observation_between_change_point': 5
+    'exp3r_param':
+      'H':
+      'delta':
+    'model_load':
+        'enable': False  # enable loading pre-trained model
+optimizer_params:
+    'optimizer':
+        'lr': 1.e-4
+        'weight_decay': 1.e-6
+    'scheduler':
+        'milestones': #[901,] if not trainer_params['separate_train'] else [901*len(problem_list),]
+        'gamma': 0.1
+
+
+logger_params:
+    'log_file':
+      'desc': #'train_{}-n20-same_{}-separate_{}-concat'.format('-'.join(str(_) for _ in problem_list),env_params[ 'same' ],trainer_params[ 'separate_train' ])
+               #   if not debug_mode else 'train_{ }-n20-same_{ }-separate_{ }-concat-debug'.format('-'.join(str(_) for _ in problem_list),env_params[ 'same' ],trainer_params[ 'separate_train' ]),
+      'filename': 'run_log'
+
