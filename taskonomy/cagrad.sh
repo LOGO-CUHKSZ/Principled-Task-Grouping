@@ -1,0 +1,1 @@
+accelerate launch --config_file=acc_config.yaml cagrad_train_taskonomy.py --arch xception_taskonomy_new --data_dir /data2/taskonomy_dataset -r -b 48 --epochs 100 --model_dir='saved_models/cagrad'                                                                                                                     
